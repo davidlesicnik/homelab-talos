@@ -1,0 +1,17 @@
+---
+machine:
+  network:
+    interfaces:
+      - interface: eth0
+        dhcp: false
+        addresses:
+          - 192.168.10.51/24
+    hostname: talos-m1
+  install:
+    device: /dev/sda
+    extraKernelArgs:
+      - "net.ifnames=0"
+  taints:
+    - key: "key"
+      value: "value"
+      effect: "NoSchedule"
