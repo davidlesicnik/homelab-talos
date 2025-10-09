@@ -24,6 +24,7 @@ All files in the `config/` directory and the `secrets.yaml` file are encrypted u
 - `kubectl` - Kubernetes CLI for interacting with the cluster once control plane is available.
 - `sops` - tool for encrypting and decrypting configuration files. See https://github.com/getsops/sops for installation.
 - `age` - encryption tool used by SOPS for key management. See https://github.com/FiloSottile/age for installation.
+- `~/.config/sops/age/keys.txt` - your age key file, required by SOPS for encryption and decryption
 
 ## Quick start (high level)
 
