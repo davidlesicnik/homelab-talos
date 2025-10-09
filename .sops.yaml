@@ -1,0 +1,12 @@
+---
+creation_rules:
+  - path_regex: /*secrets(\.encrypted)?.yaml$
+    age: age1c44g8rpzgk0fdaacc5heg6ujyq2f6tywck0h0luqhps8n84mlc2qvz8s7p
+  - path_regex: /*controlplane(\.encrypted)?.yaml$
+    encrypted_regex: "(^token|crt|key|id|secret|secretboxEncryptionSecret)$"
+    age: age1c44g8rpzgk0fdaacc5heg6ujyq2f6tywck0h0luqhps8n84mlc2qvz8s7p
+  - path_regex: /*worker(\.encrypted)?.yaml$
+    encrypted_regex: "(^token|crt|key|id|secret|secretboxEncryptionSecret)$"
+    age: age1c44g8rpzgk0fdaacc5heg6ujyq2f6tywck0h0luqhps8n84mlc2qvz8s7p
+  - path_regex: /*talosconfig(\.encrypted)?$
+    age: age1c44g8rpzgk0fdaacc5heg6ujyq2f6tywck0h0luqhps8n84mlc2qvz8s7p

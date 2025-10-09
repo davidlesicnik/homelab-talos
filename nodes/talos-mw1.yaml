@@ -1,0 +1,25 @@
+machine:
+  network:
+    interfaces:
+      - interface: eth0
+        dhcp: false
+        addresses:
+          - 192.168.10.40/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.10.1"
+    nameservers:
+      - 192.168.10.25
+    hostname: talos-mw1
+  install:
+    extraKernelArgs:
+      - "net.ifnames=0"  # Uses traditional network interface naming (eth0, eth1, etc.)
+  kubelet:
+    extraArgs:
+      rotate-server-certificates: true  # Enables automatic certificate rotation
+cluster:
+  extraManifests:
+    - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
+  controlPlane:
+    endpoint: https://192.168.10.40:6443
+  allowSchedulingOnControlPlanes: true

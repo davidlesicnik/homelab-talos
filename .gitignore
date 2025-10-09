@@ -1,1 +1,5 @@
 secrets.yaml
+talosconfig
+controlplane.yaml
+worker.yaml
+kubeconfig
