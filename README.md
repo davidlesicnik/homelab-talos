@@ -25,6 +25,7 @@ All files in the `config/` directory and the `secrets.yaml` file are encrypted u
 - `sops` - tool for encrypting and decrypting configuration files. See https://github.com/getsops/sops for installation.
 - `age` - encryption tool used by SOPS for key management. See https://github.com/FiloSottile/age for installation.
 - `~/.config/sops/age/keys.txt` - your age key file, required by SOPS for encryption and decryption
+> **Note:** The files in the `config/` folder are prerequisites and are generated using `talosctl gen config`. Ensure you have created these files before proceeding with cluster setup.
 
 ## Quick start (high level)
 
