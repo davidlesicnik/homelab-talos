@@ -13,10 +13,6 @@ This repo holds configuration files and node manifests used to provision my Talo
     - `talos-mw1.yaml` - node manifest for a master-worker node
 - `secrets.encrypted.yaml` - encrypted secrets file (SOPS)
 
-## Encryption
-
-All files in the `config/` directory and the `secrets.yaml` file are encrypted using [SOPS](https://github.com/getsops/sops) to ensure sensitive data is protected. Use SOPS to decrypt and edit these files as needed.
-
 ## Prerequisites
 
 - A machine or VM image that will run Talos OS on each node.
@@ -35,10 +31,6 @@ All files in the `config/` directory and the `secrets.yaml` file are encrypted u
 4. Use `talosctl` to apply configuration to machines and bootstrap the control plane.
 
 ## Handling Secrets
-
-Sensitive files are encrypted with a combination of [SOPS](https://github.com/getsops/sops) and [age](https://github.com/FiloSottile/age).
-
-Make sure the packages are installed before proceeding.
 
 - **Encryption:**  
     Use the following command to encrypt the files with SOPS: (secrets file as an example)
