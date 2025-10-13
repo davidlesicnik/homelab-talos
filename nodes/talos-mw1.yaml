@@ -13,10 +13,13 @@ machine:
     hostname: talos-mw1
   install:
     extraKernelArgs:
-      - "net.ifnames=0"  # Uses traditional network interface naming (eth0, eth1, etc.)
+      - "net.ifnames=0"
   kubelet:
     extraArgs:
-      rotate-server-certificates: true  # Enables automatic certificate rotation
+      rotate-server-certificates: true
+  nodeLabels:
+    "node.kubernetes.io/exclude-from-external-load-balancers":
+      $patch: delete
 cluster:
   extraManifests:
     - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
