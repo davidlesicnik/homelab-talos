@@ -66,13 +66,27 @@ This repo holds configuration files and node manifests used to provision my Talo
 5. Bootstrap the cluster
 
     ```
-    talosctl bootstrap -n 10.0.50.161
+    talosctl bootstrap -n 192.168.10.40
     ```
 6. Grab the kubeconfig and save it to .kube
     ```
-    talosctl kubeconfig -n 10.0.50.161 ~/.kube/config
+    talosctl kubeconfig -n 192.168.10.40 ~/.kube/config
     ```
 7. Wait a few minutes for the k8s cluster to be online, then verify the node
     ```
     kubectl get node -o wide
+    ```
+
+## Getting talosctl to work on a new workstation
+
+1. Decrypt the encrypted files
+2. Add the node to the talos cluster endpoint (control planes) and nodes list
+
+    ```
+    talosctl config endpoint 192.168.10.40
+    talosctl config node 192.168.10.40
+    ```
+3. Grab the kube config
+    ```
+    talosctl kubeconfig -n 192.168.10.40
     ```
