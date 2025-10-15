@@ -1,0 +1,21 @@
+machine:
+  install:
+    extraKernelArgs:
+      - "net.ifnames=0"
+  nodeLabels:
+    "node.kubernetes.io/exclude-from-external-load-balancers":
+      $patch: delete
+  kubelet:
+    extraArgs:
+      rotate-server-certificates: true
+    extraMounts:
+      - destination: /var/lib/longhorn
+        type: bind
+        source: /var/lib/longhorn
+        options:
+          - bind
+          - rshared
+          - rw
+  sysctls:
+    fs.inotify.max_user_instances: "8192"
+    fs.inotify.max_user_watches: "524288"

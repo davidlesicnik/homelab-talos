@@ -4,7 +4,7 @@ machine:
       - interface: eth0
         dhcp: false
         addresses:
-          - 192.168.10.50/24
+          - 192.168.10.41/24
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.10.1"
@@ -12,4 +12,4 @@ machine:
           ip: 192.168.10.40
     nameservers:
       - 192.168.10.25
-    hostname: talos-mw1
+    hostname: talos-m1
