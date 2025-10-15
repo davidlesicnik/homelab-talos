@@ -14,15 +14,20 @@ machine:
   install:
     extraKernelArgs:
       - "net.ifnames=0"
-  kubelet:
-    extraArgs:
-      rotate-server-certificates: true
   nodeLabels:
     "node.kubernetes.io/exclude-from-external-load-balancers":
       $patch: delete
-cluster:
-  extraManifests:
-    - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
-  controlPlane:
-    endpoint: https://192.168.10.40:6443
-  allowSchedulingOnControlPlanes: true
+  kubelet:
+    extraArgs:
+      rotate-server-certificates: true
+    extraMounts:
+      - destination: /var/lib/longhorn
+        type: bind
+        source: /var/lib/longhorn
+        options:
+          - bind
+          - rshared
+          - rw
+  sysctls:
+    fs.inotify.max_user_instances: "8192"
+    fs.inotify.max_user_watches: "524288"

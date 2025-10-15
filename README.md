@@ -50,12 +50,12 @@ This repo holds configuration files and node manifests used to provision my Talo
 2. Run the following command to apply the control plane configuration (replace the IP with your node's address):
 
     ```
-    talosctl apply-config --insecure --nodes 192.168.10.121 --file config/controlplane.yaml
+    talosctl apply-config --insecure --nodes 192.168.10.126 --file config/controlplane.yaml
     ```
 3. Patch the talos-mw1 node with it's network settings, and some custome cluster settings
 
     ```
-    talosctl patch mc --talosconfig _out/talosconfig -e 192.168.10.121 -n 192.168.10.121 --patch @nodes/talos-mw1.yaml
+    talosctl patch mc --talosconfig config/talosconfig -e 192.168.10.127 -n 192.168.10.127 --patch @patches/nodes/talos-mw1.yaml --patch @patches/cluster-patches.yaml
     ```
 4. Add the new node to the talos cluster endpoint (control planes) and nodes list
 
