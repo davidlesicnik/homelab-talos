@@ -9,8 +9,11 @@ This repo holds configuration files and node manifests used to provision my Talo
     - `controlplane.encrypted.yaml` - encrypted control plane config (SOPS)
     - `worker.encrypted.yaml` - encrypted worker config (SOPS)
     - `talosconfig.encrypted` - encrypted Talosctl config (SOPS)
-- `nodes/` - node-specific manifests
-    - `talos-mw1.yaml` - node manifest for a master-worker node
+- `patches/` - patch manifests
+    - `nodes/` - node-specific patches
+        - `talos-m1.yaml` - node manifest for a master only node
+        - `talos-mw1.yaml` - node manifest for a master-worker node
+        - `talos-mw2.yaml` - node manifest for a master-worker node
 - `secrets.encrypted.yaml` - encrypted secrets file (SOPS)
 
 ## Prerequisites
