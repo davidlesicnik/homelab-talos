@@ -51,30 +51,36 @@ This repo holds configuration files and node manifests used to provision my Talo
 
     ```
     talosctl apply-config --insecure --nodes 192.168.10.126 --file config/controlplane.yaml
+    talosctl apply-config --insecure --nodes 192.168.10.127 --file config/controlplane.yaml
+    talosctl apply-config --insecure --nodes 192.168.10.128 --file config/controlplane.yaml
     ```
-3. Patch the nodes with the apropriate patches (note that the endpoint stays the same), use the IP of the above endpoint for -e
+3. Wait a few minutes for them to apply and reboot then patch the first node with the apropriate patches
 
     ```
     talosctl patch mc --talosconfig config/talosconfig -e 192.168.10.126 -n 192.168.10.126 --patch @patches/nodes/talos-m1.yaml --patch @patches/cluster-patches.yaml --patch @patches/nodes/all-nodes.yaml 
-    talosctl patch mc --talosconfig config/talosconfig -e 192.168.10.126 -n 192.168.10.127 --patch @patches/nodes/talos-mw1.yaml --patch @patches/cluster-patches.yaml --patch @patches/nodes/all-nodes.yaml 
-    talosctl patch mc --talosconfig config/talosconfig -e 192.168.10.126 -n 192.168.10.128 --patch @patches/nodes/talos-mw2.yaml --patch @patches/cluster-patches.yaml --patch @patches/nodes/all-nodes.yaml 
     ```
-4. Add the new node to the talos cluster endpoint (control planes) and nodes list
+
+4. Once the first node is up, patch the other two. (note that the endpoint stays the same), use the IP of the above endpoint for -e
+    ```
+    talosctl patch mc --talosconfig config/talosconfig -e 192.168.10.41 -n 192.168.10.127 --patch @patches/nodes/talos-mw1.yaml --patch @patches/nodes/all-nodes.yaml 
+    talosctl patch mc --talosconfig config/talosconfig -e 192.168.10.41 -n 192.168.10.128 --patch @patches/nodes/talos-mw2.yaml  --patch @patches/nodes/all-nodes.yaml 
+    ```
+5. Add the new node to the talos cluster endpoint (control planes) and nodes list
 
     ```
     talosctl config endpoint 192.168.10.41 192.168.10.50 192.168.10.51
     talosctl config node 192.168.10.41 192.168.10.50 192.168.10.51
     ```
-5. Bootstrap the cluster
+6. Bootstrap the cluster
 
     ```
     talosctl bootstrap -n 192.168.10.41
     ```
-6. Grab the kubeconfig and save it to .kube
+7. Grab the kubeconfig and save it to .kube
     ```
     talosctl kubeconfig -n 192.168.10.41 ~/.kube/config
     ```
-7. Wait a few minutes for the k8s cluster to be online, then verify the node
+8. Wait a few minutes for the k8s cluster to be online, then verify the node
     ```
     kubectl get node -o wide
     ```
