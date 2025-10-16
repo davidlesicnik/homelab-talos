@@ -13,3 +13,6 @@ machine:
     nameservers:
       - 192.168.10.25
     hostname: talos-m1
+  kubelet:
+    extraArgs:
+      register-with-taints: node-role.kubernetes.io/control-plane:NoSchedule
