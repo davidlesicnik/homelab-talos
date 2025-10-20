@@ -87,8 +87,8 @@ This repo holds configuration files and node manifests used to provision my Talo
     talosctl upgrade --nodes 192.168.10.50 --image $TALOS_IMAGE
     talosctl health --nodes 192.168.10.50
     ```
-    Wait for it to become health
-        ```
+    Wait for it to become healthy
+    ```
     TALOS_IMAGE="factory.talos.dev/nocloud-installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.11.3"
     talosctl upgrade --nodes 192.168.10.51 --image $TALOS_IMAGE
     talosctl health --nodes 192.168.10.51
