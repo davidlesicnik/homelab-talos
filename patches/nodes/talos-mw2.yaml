@@ -21,6 +21,7 @@ machine:
         - mountpoint: /var/lib/longhorn
   kubelet:
     extraMounts:
+      - $patch: replace
       - destination: /var/lib/longhorn
         type: bind
         source: /var/lib/longhorn
