@@ -1,6 +1,7 @@
 machine:
   network:
     interfaces:
+      - $patch: replace
       - interface: eth0
         dhcp: false
         addresses:
@@ -11,6 +12,7 @@ machine:
         vip:
           ip: 192.168.10.40
     nameservers:
+      - $patch: replace
       - 192.168.10.25
     hostname: talos-m1
   kubelet:
