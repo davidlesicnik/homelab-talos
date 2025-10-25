@@ -74,14 +74,29 @@ This repo holds configuration files and node manifests used to provision my Talo
     talosctl config endpoint 192.168.10.41 192.168.10.50 192.168.10.51
     talosctl config node 192.168.10.41 192.168.10.50 192.168.10.51
     ```
-6. Upgrade nodes with iSCSI, QEMU and disk utils extensions (check version!)
+
+6. Bootstrap the cluster
+
+    ```
+    talosctl bootstrap -n 192.168.10.41
+    ```
+7. Grab the kubeconfig and save it to .kube
+    ```
+    talosctl kubeconfig -n 192.168.10.41 ~/.kube/config
+    ```
+8. Wait a few minutes for the k8s cluster to be online, then verify the node
+    ```
+    kubectl get node -o wide
+    ```
+
+9. Upgrade nodes with iSCSI, QEMU and disk utils extensions (check version!)
    If unsure, genereate a new schematic ID: https://factory.talos.dev/
     ```
     TALOS_IMAGE="factory.talos.dev/nocloud-installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.11.3"
     talosctl upgrade --nodes 192.168.10.41 --image $TALOS_IMAGE
     talosctl health --nodes 192.168.10.41
     ```
-7. Once the node is healthly, repeat the process for the other two nodes
+10. Once the node is healthly, repeat the process for the other two nodes
     ```
     TALOS_IMAGE="factory.talos.dev/nocloud-installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.11.3"
     talosctl upgrade --nodes 192.168.10.50 --image $TALOS_IMAGE
@@ -92,19 +107,6 @@ This repo holds configuration files and node manifests used to provision my Talo
     TALOS_IMAGE="factory.talos.dev/nocloud-installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.11.3"
     talosctl upgrade --nodes 192.168.10.51 --image $TALOS_IMAGE
     talosctl health --nodes 192.168.10.51
-    ```
-8. Bootstrap the cluster
-
-    ```
-    talosctl bootstrap -n 192.168.10.41
-    ```
-9. Grab the kubeconfig and save it to .kube
-    ```
-    talosctl kubeconfig -n 192.168.10.41 ~/.kube/config
-    ```
-10. Wait a few minutes for the k8s cluster to be online, then verify the node
-    ```
-    kubectl get node -o wide
     ```
 
 ## Getting talosctl to work on a new workstation
